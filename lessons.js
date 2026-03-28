@@ -2213,7 +2213,7 @@ fi</code></pre>
     <pre><code>#!/bin/bash
 # 사용법: init-project.sh [프로젝트명] [설명]
 PROJECT_NAME=$1
-PROJECT_DESC=${2:-"프로젝트 설명을 입력하세요"}
+PROJECT_DESC=\${2:-"프로젝트 설명을 입력하세요"}
 
 if [ -z "$PROJECT_NAME" ]; then
   echo "사용법: init-project.sh [프로젝트명] [설명]"
