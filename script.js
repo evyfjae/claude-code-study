@@ -80,14 +80,14 @@ function generatePlaceholderLessons() {
   Object.entries(LESSONS).forEach(([key, lesson]) => {
     // 이미 HTML에 콘텐츠가 있는 레슨은 스킵 (1-1, 1-2는 HTML에 직접 작성)
     const existing = document.getElementById(`lesson-${key}`);
-    if (existing) {
-      // 이미 존재하지만 coming-soon인 경우만 재생성
-      if (!existing.querySelector('.coming-soon')) return;
-    }
+    if (existing && !existing.querySelector('.coming-soon')) return;
 
     const section = existing || document.createElement('section');
     section.className = 'page';
     section.id = `lesson-${key}`;
+
+    // LESSON_CONTENT에 콘텐츠가 있으면 사용, 없으면 placeholder
+    const hasContent = typeof LESSON_CONTENT !== 'undefined' && LESSON_CONTENT[key];
 
     const prevNav = lesson.prev
       ? `<a href="#lesson-${lesson.prev}" class="lesson-nav-btn" onclick="navigateTo('lesson-${lesson.prev}')">&#8592; ${lesson.prevLabel}</a>`
@@ -96,19 +96,21 @@ function generatePlaceholderLessons() {
       ? `<a href="#lesson-${lesson.next}" class="lesson-nav-btn lesson-nav-next" onclick="navigateTo('lesson-${lesson.next}')">${lesson.nextLabel} &#8594;</a>`
       : `<a href="#overview" class="lesson-nav-btn lesson-nav-next" onclick="navigateTo('overview')">Overview &#8594;</a>`;
 
+    const body = hasContent
+      ? LESSON_CONTENT[key]
+      : `<div class="card"><div class="coming-soon">
+           <span class="coming-icon">&#128218;</span>
+           <p>이 레슨의 콘텐츠는 학습 진행에 따라 채워집니다.</p>
+           <p class="coming-sub">Claude Code 세션에서 "${key} 학습 시작"이라고 말하면 이 페이지가 업데이트됩니다.</p>
+         </div></div>`;
+
     section.innerHTML = `
       <div class="lesson-header" style="--phase-color: var(--${lesson.color})">
         <div class="lesson-phase">${lesson.phaseLabel}</div>
         <h1>${key}. ${lesson.title}</h1>
         <p class="lesson-desc">${lesson.desc}</p>
       </div>
-      <div class="card">
-        <div class="coming-soon">
-          <span class="coming-icon">&#128218;</span>
-          <p>이 레슨의 콘텐츠는 학습 진행에 따라 채워집니다.</p>
-          <p class="coming-sub">Claude Code 세션에서 "${key} 학습 시작"이라고 말하면 이 페이지가 업데이트됩니다.</p>
-        </div>
-      </div>
+      ${body}
       <div class="lesson-nav">
         ${prevNav}
         ${nextNav}
