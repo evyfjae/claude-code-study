@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Mastery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- 사이드바 -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">&#9670;</span>
+        <span class="logo-text">CC Mastery</span>
+      </div>
+      <button class="sidebar-close" id="sidebarClose">&#10005;</button>
+    </div>
+
+    <div class="sidebar-nav">
+      <a href="#overview" class="nav-item active" data-section="overview">
+        <span class="nav-icon">&#9673;</span> Overview
+      </a>
+
+      <div class="nav-group">
+        <div class="nav-group-label">Phase 1 &mdash; 터미널 환경</div>
+        <a href="#lesson-1-1" class="nav-item" data-section="lesson-1-1">
+          <span class="nav-dot"></span> 1-1 Ghostty + tmux 통합
+        </a>
+        <a href="#lesson-1-2" class="nav-item" data-section="lesson-1-2">
+          <span class="nav-dot"></span> 1-2 워크스페이스 레이아웃
+        </a>
+        <a href="#lesson-1-3" class="nav-item" data-section="lesson-1-3">
+          <span class="nav-dot"></span> 1-3 Claude Code 통합 패턴
+        </a>
+        <a href="#lesson-1-4" class="nav-item" data-section="lesson-1-4">
+          <span class="nav-dot"></span> 1-4 환경 영속성
+        </a>
+        <a href="#lesson-1-5" class="nav-item" data-section="lesson-1-5">
+          <span class="nav-dot"></span> 1-5 키바인딩 정리
+        </a>
+        <a href="#lesson-1-6" class="nav-item" data-section="lesson-1-6">
+          <span class="nav-dot"></span> 1-6 실전 워크스페이스
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-label">Phase 2 &mdash; 하네스 엔지니어링</div>
+        <a href="#lesson-2-1" class="nav-item" data-section="lesson-2-1">
+          <span class="nav-dot"></span> 2-1 CLAUDE.md 설계
+        </a>
+        <a href="#lesson-2-2" class="nav-item" data-section="lesson-2-2">
+          <span class="nav-dot"></span> 2-2 settings.json 전체
+        </a>
+        <a href="#lesson-2-3" class="nav-item" data-section="lesson-2-3">
+          <span class="nav-dot"></span> 2-3 Hooks 심화
+        </a>
+        <a href="#lesson-2-4" class="nav-item" data-section="lesson-2-4">
+          <span class="nav-dot"></span> 2-4 Permissions 전략
+        </a>
+        <a href="#lesson-2-5" class="nav-item" data-section="lesson-2-5">
+          <span class="nav-dot"></span> 2-5 MCP 심화
+        </a>
+        <a href="#lesson-2-6" class="nav-item" data-section="lesson-2-6">
+          <span class="nav-dot"></span> 2-6 하네스 설계 실습
+        </a>
+        <a href="#lesson-2-7" class="nav-item" data-section="lesson-2-7">
+          <span class="nav-dot"></span> 2-7 Memory 시스템
+        </a>
+        <a href="#lesson-2-8" class="nav-item" data-section="lesson-2-8">
+          <span class="nav-dot"></span> 2-8 Custom Commands
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-label">Phase 3 &mdash; Agent Team</div>
+        <a href="#lesson-3-1" class="nav-item" data-section="lesson-3-1">
+          <span class="nav-dot"></span> 3-1 Subagent 원리
+        </a>
+        <a href="#lesson-3-2" class="nav-item" data-section="lesson-3-2">
+          <span class="nav-dot"></span> 3-2 다중 세션 운영
+        </a>
+        <a href="#lesson-3-3" class="nav-item" data-section="lesson-3-3">
+          <span class="nav-dot"></span> 3-3 Headless 모드
+        </a>
+        <a href="#lesson-3-4" class="nav-item" data-section="lesson-3-4">
+          <span class="nav-dot"></span> 3-4 작업 분할 전략
+        </a>
+        <a href="#lesson-3-5" class="nav-item" data-section="lesson-3-5">
+          <span class="nav-dot"></span> 3-5 에이전트 통신
+        </a>
+        <a href="#lesson-3-6" class="nav-item" data-section="lesson-3-6">
+          <span class="nav-dot"></span> 3-6 실전 멀티 에이전트
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-label">Phase 4 &mdash; 실무 운영</div>
+        <a href="#lesson-4-1" class="nav-item" data-section="lesson-4-1">
+          <span class="nav-dot"></span> 4-1 일일 워크플로우
+        </a>
+        <a href="#lesson-4-2" class="nav-item" data-section="lesson-4-2">
+          <span class="nav-dot"></span> 4-2 세션 연속성
+        </a>
+        <a href="#lesson-4-3" class="nav-item" data-section="lesson-4-3">
+          <span class="nav-dot"></span> 4-3 MCP 생태계
+        </a>
+        <a href="#lesson-4-4" class="nav-item" data-section="lesson-4-4">
+          <span class="nav-dot"></span> 4-4 자동화 파이프라인
+        </a>
+        <a href="#lesson-4-5" class="nav-item" data-section="lesson-4-5">
+          <span class="nav-dot"></span> 4-5 프로젝트 템플릿
+        </a>
+        <a href="#lesson-4-6" class="nav-item" data-section="lesson-4-6">
+          <span class="nav-dot"></span> 4-6 트러블슈팅
+        </a>
+        <a href="#lesson-4-7" class="nav-item" data-section="lesson-4-7">
+          <span class="nav-dot"></span> 4-7 Sprint 시뮬레이션
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-label">Phase 5 &mdash; 모바일 소통</div>
+        <a href="#lesson-5-1" class="nav-item" data-section="lesson-5-1">
+          <span class="nav-dot"></span> 5-1 SSH 원격 접근
+        </a>
+        <a href="#lesson-5-2" class="nav-item" data-section="lesson-5-2">
+          <span class="nav-dot"></span> 5-2 tmux attach
+        </a>
+        <a href="#lesson-5-3" class="nav-item" data-section="lesson-5-3">
+          <span class="nav-dot"></span> 5-3 모바일 클라이언트
+        </a>
+        <a href="#lesson-5-4" class="nav-item" data-section="lesson-5-4">
+          <span class="nav-dot"></span> 5-4 모바일 최적화
+        </a>
+        <a href="#lesson-5-5" class="nav-item" data-section="lesson-5-5">
+          <span class="nav-dot"></span> 5-5 알림 시스템
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-group-label">참고자료</div>
+        <a href="#ref-commands" class="nav-item" data-section="ref-commands">
+          <span class="nav-icon">&#9881;</span> 명령어 사전
+        </a>
+        <a href="#ref-links" class="nav-item" data-section="ref-links">
+          <span class="nav-icon">&#128279;</span> 공식 문서
+        </a>
+        <a href="#ref-files" class="nav-item" data-section="ref-files">
+          <span class="nav-icon">&#128193;</span> 설정 파일 맵
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 메인 콘텐츠 -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn">&#9776;</button>
+      <div class="topbar-title" id="topbarTitle">Overview</div>
+      <div class="topbar-actions">
+        <span class="progress-pill" id="progressPill">0 / 32</span>
+        <button class="theme-btn" id="themeToggle" title="테마 전환">
+          <span id="themeIcon">&#9790;</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ===== OVERVIEW ===== -->
+      <section class="page active" id="overview">
+        <div class="hero">
+          <div class="hero-badge">Jack's Learning Journey</div>
+          <h1>Claude Code Mastery</h1>
+          <p class="hero-sub">Claude Code를 실무 운영 수준까지 마스터하는 32단계 학습 코스</p>
+        </div>
+
+        <!-- 진행률 -->
+        <div class="progress-overview">
+          <div class="progress-ring-container">
+            <svg class="progress-ring" viewBox="0 0 120 120">
+              <circle class="progress-ring-bg" cx="60" cy="60" r="52" />
+              <circle class="progress-ring-fill" id="progressRing" cx="60" cy="60" r="52"
+                      stroke-dasharray="326.73" stroke-dashoffset="326.73" />
+            </svg>
+            <div class="progress-ring-text">
+              <span class="progress-ring-pct" id="progressPct">0%</span>
+              <span class="progress-ring-label">완료</span>
+            </div>
+          </div>
+          <div class="phase-cards">
+            <div class="phase-card" data-phase="1">
+              <div class="phase-card-bar" style="--phase-color: var(--blue)"><div class="phase-card-fill" data-phase-fill="1"></div></div>
+              <div class="phase-card-info">
+                <span class="phase-card-num">Phase 1</span>
+                <span class="phase-card-title">터미널 환경</span>
+                <span class="phase-card-count" data-phase-count="1">0/6</span>
+              </div>
+            </div>
+            <div class="phase-card" data-phase="2">
+              <div class="phase-card-bar" style="--phase-color: var(--mauve)"><div class="phase-card-fill" data-phase-fill="2"></div></div>
+              <div class="phase-card-info">
+                <span class="phase-card-num">Phase 2</span>
+                <span class="phase-card-title">하네스 엔지니어링</span>
+                <span class="phase-card-count" data-phase-count="2">0/8</span>
+              </div>
+            </div>
+            <div class="phase-card" data-phase="3">
+              <div class="phase-card-bar" style="--phase-color: var(--green)"><div class="phase-card-fill" data-phase-fill="3"></div></div>
+              <div class="phase-card-info">
+                <span class="phase-card-num">Phase 3</span>
+                <span class="phase-card-title">Agent Team</span>
+                <span class="phase-card-count" data-phase-count="3">0/6</span>
+              </div>
+            </div>
+            <div class="phase-card" data-phase="4">
+              <div class="phase-card-bar" style="--phase-color: var(--peach)"><div class="phase-card-fill" data-phase-fill="4"></div></div>
+              <div class="phase-card-info">
+                <span class="phase-card-num">Phase 4</span>
+                <span class="phase-card-title">실무 운영</span>
+                <span class="phase-card-count" data-phase-count="4">0/7</span>
+              </div>
+            </div>
+            <div class="phase-card" data-phase="5">
+              <div class="phase-card-bar" style="--phase-color: var(--teal)"><div class="phase-card-fill" data-phase-fill="5"></div></div>
+              <div class="phase-card-info">
+                <span class="phase-card-num">Phase 5</span>
+                <span class="phase-card-title">모바일 소통</span>
+                <span class="phase-card-count" data-phase-count="5">0/5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 아키텍처 다이어그램 -->
+        <div class="card">
+          <div class="card-title">3계층 아키텍처</div>
+          <div class="architecture">
+            <div class="arch-layer arch-ghostty">
+              <div class="arch-label">Ghostty</div>
+              <div class="arch-desc">화면을 그리는 터미널 앱 (폰트, 색상, 창 관리)</div>
+            </div>
+            <div class="arch-arrow">&#9660;</div>
+            <div class="arch-layer arch-tmux">
+              <div class="arch-label">tmux</div>
+              <div class="arch-desc">터미널 멀티플렉서 (세션 유지, 분할, 원격 접속)</div>
+            </div>
+            <div class="arch-arrow">&#9660;</div>
+            <div class="arch-layer arch-claude">
+              <div class="arch-label">Claude Code</div>
+              <div class="arch-desc">AI 에이전트 (코드 작성, 파일 관리, 작업 실행)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 학습 환경 현황 -->
+        <div class="card">
+          <div class="card-title">현재 환경</div>
+          <div class="env-grid">
+            <div class="env-item env-good">
+              <span class="env-status">&#10003;</span>
+              <div>
+                <strong>Claude Code 2.1.84</strong>
+                <span>hooks, permissions, MCP 구성 완료</span>
+              </div>
+            </div>
+            <div class="env-item env-good">
+              <span class="env-status">&#10003;</span>
+              <div>
+                <strong>tmux 3.6a</strong>
+                <span>Catppuccin, vi mode, 플러그인 구성 완료</span>
+              </div>
+            </div>
+            <div class="env-item env-warn">
+              <span class="env-status">!</span>
+              <div>
+                <strong>Ghostty</strong>
+                <span>설치됨, 설정 파일 미구성</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== LESSON 1-1 ===== -->
+      <section class="page" id="lesson-1-1">
+        <div class="lesson-header" style="--phase-color: var(--blue)">
+          <div class="lesson-phase">Phase 1 &mdash; 터미널 환경</div>
+          <h1>1-1. Ghostty + tmux + Claude Code 기본 통합</h1>
+          <p class="lesson-desc">터미널 환경을 완성하여 이후 모든 학습의 기반을 마련합니다.</p>
+        </div>
+
+        <div class="lesson-why card">
+          <div class="card-title">왜 지금 이걸 배우는가?</div>
+          <ul>
+            <li>앞으로 32단계 학습이 전부 터미널에서 진행됨 &mdash; 환경이 불편하면 학습이 비효율적</li>
+            <li>Ghostty가 설치만 되어있고 설정 파일이 없는 상태 &mdash; 지금 바로 개선 가능</li>
+            <li>파일 하나만 만들면 되니 부담이 낮고, 효과는 즉시 체감됨</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">핵심 개념: Ghostty 분할 vs tmux 분할</div>
+          <div class="compare-table">
+            <div class="compare-header">
+              <div></div>
+              <div>Ghostty 분할</div>
+              <div>tmux 분할</div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">세션 유지</div>
+              <div class="compare-bad">Ghostty 종료 시 사라짐</div>
+              <div class="compare-good">detach 후에도 유지</div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">원격 접속</div>
+              <div class="compare-bad">불가능</div>
+              <div class="compare-good">SSH로 어디서든 attach</div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">레이아웃 저장</div>
+              <div class="compare-bad">불가능</div>
+              <div class="compare-good">resurrect로 복원</div>
+            </div>
+            <div class="compare-row">
+              <div class="compare-label">모바일 접근</div>
+              <div class="compare-bad">불가능</div>
+              <div class="compare-good">Phase 5에서 활용</div>
+            </div>
+          </div>
+          <div class="callout callout-info">
+            <strong>결론:</strong> tmux 분할을 주력으로 사용하고, Ghostty는 탭 관리 정도만 활용합니다.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">설정 파일 작성</div>
+          <p class="card-desc">Ghostty 설정 파일 위치: <code>~/Library/Application Support/com.mitchellh.ghostty/config</code></p>
+          <p class="card-desc"><code>key = value</code> 형식, <code>#</code>으로 주석. <kbd>Cmd+Shift+,</kbd>로 재시작 없이 반영 가능.</p>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span>~/Library/Application Support/com.mitchellh.ghostty/config</span>
+              <button class="copy-btn" onclick="copyCode(this)">복사</button>
+            </div>
+            <pre><code># === 폰트 ===
+font-family = JetBrains Mono
+font-size = 14
+
+# === 테마 (tmux Catppuccin Mocha와 통일) ===
+theme = catppuccin-mocha
+
+# === 창 설정 ===
+window-padding-x = 4
+window-padding-y = 4
+window-decoration = true
+macos-titlebar-style = tabs
+
+# === macOS 전용 ===
+macos-option-as-alt = true
+
+# === tmux 자동 시작 ===
+# Ghostty를 열면 바로 tmux main 세션에 연결
+# -A: 있으면 attach, 없으면 새로 생성
+command = /opt/homebrew/bin/tmux new-session -A -s main
+
+# === 클립보드 ===
+copy-on-select = clipboard
+
+# === 커서 ===
+cursor-style = block
+cursor-style-blink = false
+
+# === 기타 ===
+confirm-close-surface = false
+mouse-hide-while-typing = true</code></pre>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">설정 옵션 상세 해설</div>
+
+          <div class="option-group">
+            <div class="option-item">
+              <div class="option-name"><code>theme = catppuccin-mocha</code></div>
+              <div class="option-desc">Ghostty에 내장된 Catppuccin Mocha 테마. tmux에서도 같은 테마를 쓰고 있으므로 색상이 통일됩니다. Ghostty는 터미널의 16색 팔레트를 설정하고, tmux Catppuccin은 상태바 등 UI 요소를 꾸밉니다 &mdash; 둘 다 설정해야 완전히 통일됩니다.</div>
+            </div>
+            <div class="option-item">
+              <div class="option-name"><code>macos-option-as-alt = true</code></div>
+              <div class="option-desc">macOS에서 Option 키를 Alt/Meta로 사용합니다. tmux에서 <kbd>M-key</kbd>(Meta) 조합이나, vim의 Alt 단축키를 쓸 때 필수입니다. 이 설정 없이는 Option 키가 특수 문자(예: ∑, ¥)를 입력합니다.</div>
+            </div>
+            <div class="option-item">
+              <div class="option-name"><code>command = /opt/homebrew/bin/tmux new-session -A -s main</code></div>
+              <div class="option-desc">Ghostty를 열면 셸 대신 이 명령어가 실행됩니다.
+                <ul>
+                  <li><code>-A</code>: attach-or-create. <code>main</code> 세션이 이미 있으면 연결, 없으면 새로 생성</li>
+                  <li><code>-s main</code>: 세션 이름을 <code>main</code>으로 지정</li>
+                  <li>전체 경로(<code>/opt/homebrew/bin/tmux</code>)를 쓰는 이유: Ghostty가 로그인 셸 프로파일(~/.zshrc)을 거치지 않고 직접 실행하기 때문에 PATH에 homebrew 경로가 없을 수 있음</li>
+                </ul>
+              </div>
+            </div>
+            <div class="option-item">
+              <div class="option-name"><code>macos-titlebar-style = tabs</code></div>
+              <div class="option-desc">네이티브 macOS 탭을 타이틀바에 통합합니다. 여러 Ghostty 탭을 깔끔하게 관리할 수 있습니다.</div>
+            </div>
+            <div class="option-item">
+              <div class="option-name"><code>copy-on-select = clipboard</code></div>
+              <div class="option-desc">마우스로 텍스트를 선택하면 자동으로 클립보드에 복사됩니다. <kbd>Cmd+C</kbd>를 누를 필요가 없어 편리합니다.</div>
+            </div>
+            <div class="option-item">
+              <div class="option-name"><code>confirm-close-surface = false</code></div>
+              <div class="option-desc">pane이나 탭을 닫을 때 확인 대화상자를 건너뜁니다. tmux 세션은 Ghostty를 닫아도 살아있으므로 안전합니다.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">실습: 설정 적용하기</div>
+          <div class="practice-steps">
+            <div class="practice-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <strong>설정 파일 생성</strong>
+                <p>Claude Code 세션에서 아래 명령어를 실행하세요:</p>
+                <div class="code-block inline">
+                  <pre><code>mkdir -p ~/Library/Application\ Support/com.mitchellh.ghostty</code></pre>
+                </div>
+                <p>그리고 위의 설정 내용을 config 파일로 저장하세요. Claude Code에게 "위 Ghostty 설정을 적용해줘"라고 하면 됩니다.</p>
+              </div>
+            </div>
+            <div class="practice-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <strong>Ghostty 재시작 후 확인</strong>
+                <p>Ghostty를 완전히 종료(<kbd>Cmd+Q</kbd>) 후 다시 열면, 자동으로 tmux <code>main</code> 세션에 진입해야 합니다.</p>
+              </div>
+            </div>
+            <div class="practice-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <strong>tmux 안에서 Claude Code 실행</strong>
+                <p><kbd>Ctrl+Space</kbd> &rarr; <kbd>%</kbd>로 세로 분할 후, 한쪽에서 <code>claude</code>를 실행하세요. 다른 pane에서 자유롭게 작업하며 Claude Code와 동시에 사용해보세요.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">이해 점검</div>
+          <div class="quiz-list">
+            <details class="quiz-item">
+              <summary>Q. Ghostty를 종료했다가 다시 열면 Claude Code 세션은 어떻게 되는가?</summary>
+              <div class="quiz-answer">
+                Claude Code는 tmux 세션 안에서 실행 중이므로, Ghostty를 닫아도 tmux 세션은 백그라운드에서 계속 살아있습니다. Ghostty를 다시 열면 <code>tmux new-session -A -s main</code>이 기존 세션에 attach하므로, Claude Code 세션이 그대로 유지됩니다.
+              </div>
+            </details>
+            <details class="quiz-item">
+              <summary>Q. <code>-A</code> 플래그 없이 <code>tmux new-session -s main</code>만 쓰면 어떤 문제가 생기는가?</summary>
+              <div class="quiz-answer">
+                이미 <code>main</code> 세션이 존재하면 "duplicate session: main" 에러가 발생하고 Ghostty가 빈 화면이 됩니다. <code>-A</code>가 있으면 기존 세션에 attach하므로 이 문제가 없습니다.
+              </div>
+            </details>
+            <details class="quiz-item">
+              <summary>Q. Ghostty의 <code>theme</code>과 tmux의 Catppuccin 플러그인은 각각 무엇을 담당하는가?</summary>
+              <div class="quiz-answer">
+                <strong>Ghostty <code>theme</code></strong>: 터미널의 기본 16색 팔레트(검정, 빨강, 초록 등)와 기본 전경/배경 색상을 설정합니다. 셸 프롬프트, ls 출력 색상 등에 영향을 줍니다.<br>
+                <strong>tmux Catppuccin</strong>: tmux의 상태바, pane 테두리, 윈도우 탭 등 tmux UI 요소의 색상을 설정합니다.<br>
+                둘 다 설정해야 터미널 전체가 통일된 Catppuccin Mocha 테마로 보입니다.
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <a href="#overview" class="lesson-nav-btn" onclick="navigateTo('overview')">&#8592; Overview</a>
+          <a href="#lesson-1-2" class="lesson-nav-btn lesson-nav-next" onclick="navigateTo('lesson-1-2')">1-2 워크스페이스 레이아웃 &#8594;</a>
+        </div>
+      </section>
+
+      <!-- ===== LESSON 1-2 ===== -->
+      <section class="page" id="lesson-1-2">
+        <div class="lesson-header" style="--phase-color: var(--blue)">
+          <div class="lesson-phase">Phase 1 &mdash; 터미널 환경</div>
+          <h1>1-2. tmux 워크스페이스 레이아웃 설계</h1>
+          <p class="lesson-desc">프로젝트별 세션/윈도우/pane 구조를 설계하여 작업 환경을 체계화합니다.</p>
+        </div>
+
+        <div class="lesson-why card">
+          <div class="card-title">왜 지금 이걸 배우는가?</div>
+          <ul>
+            <li>Phase 1-1에서 Ghostty가 자동으로 tmux에 진입하도록 설정했음 &mdash; 이제 tmux 안을 어떻게 구성할지 설계할 차례</li>
+            <li>여러 프로젝트(Study, RUNuts)를 동시에 관리하려면 체계적인 구조가 필요</li>
+            <li>Claude Code를 여러 프로젝트에서 동시 운영하는 Phase 3의 기반</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-title">tmux 3계층 구조</div>
+          <div class="hierarchy">
+            <div class="h-level h-session">
+              <div class="h-label">Session (세션)</div>
+              <div class="h-desc">프로젝트 단위. <code>tmux new -s study</code>, <code>tmux new -s runuts</code></div>
+              <div class="h-children">
+                <div class="h-level h-window">
+                  <div class="h-label">Window (윈도우)</div>
+                  <div class="h-desc">작업 유형별 탭. <code>Prefix + c</code>로 생성, <code>Prefix + 0~9</code>로 전환</div>
+                  <div class="h-children">
+                    <div class="h-level h-pane">
+                      <div class="h-label">Pane (페인)</div>
+                      <div class="h-desc">화면 분할. <code>Prefix + %</code>(세로), <code>Prefix + "</code>(가로)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">추천 워크스페이스 구조</div>
+          <div class="code-block">
+            <div class="code-header"><span>워크스페이스 레이아웃</span></div>
+            <pre><code>Session: main (기본 세션)
+  ├── Window 0: dashboard  &mdash; 시스템 모니터링, 여유 작업
+  └── Window 1: misc       &mdash; 일회성 작업
+
+Session: study
+  ├── Window 0: claude     &mdash; Claude Code 학습용
+  │     ├── Pane 0: claude (Claude Code 실행)
+  │     └── Pane 1: shell  (명령어 테스트)
+  └── Window 1: docs       &mdash; 문서 편집, 참고
+
+Session: runuts
+  ├── Window 0: claude     &mdash; Claude Code (프로젝트 작업)
+  │     ├── Pane 0: claude
+  │     └── Pane 1: shell
+  └── Window 1: manage     &mdash; git, 파일 탐색 등</code></pre>
+          </div>
+          <div class="callout callout-tip">
+            <strong>팁:</strong> 세션 간 전환은 <kbd>Prefix + s</kbd>로 세션 목록을 띄우거나, <kbd>Prefix + (</kbd> / <kbd>Prefix + )</kbd>로 이전/다음 세션으로 이동합니다.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">세션 자동 생성 스크립트</div>
+          <p class="card-desc">매번 수동으로 세션을 만들 필요 없이, 스크립트로 자동화할 수 있습니다.</p>
+          <div class="code-block">
+            <div class="code-header">
+              <span>~/bin/tmux-workspace.sh</span>
+              <button class="copy-btn" onclick="copyCode(this)">복사</button>
+            </div>
+            <pre><code>#!/bin/bash
+# tmux 워크스페이스 자동 생성
+
+# Study 세션
+if ! tmux has-session -t study 2>/dev/null; then
+  tmux new-session -d -s study -c ~/Documents/Projects/Claude\ Code\ Study
+  tmux rename-window -t study:0 claude
+  tmux split-window -h -t study:0 -c ~/Documents/Projects/Claude\ Code\ Study
+  tmux new-window -t study -n docs
+fi
+
+# RUNuts 세션
+if ! tmux has-session -t runuts 2>/dev/null; then
+  tmux new-session -d -s runuts -c ~/Documents/Projects/RUNuts\ Project\ Managing
+  tmux rename-window -t runuts:0 claude
+  tmux split-window -h -t runuts:0 -c ~/Documents/Projects/RUNuts\ Project\ Managing
+  tmux new-window -t runuts -n manage
+fi
+
+echo "워크스페이스 준비 완료!"
+tmux ls</code></pre>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">실습</div>
+          <div class="practice-steps">
+            <div class="practice-step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <strong>세션 수동 생성 연습</strong>
+                <p><code>tmux new -s study</code>로 study 세션을 만들고, <code>Prefix + c</code>로 윈도우를 추가해보세요. <code>Prefix + ,</code>로 윈도우 이름을 바꿀 수 있습니다.</p>
+              </div>
+            </div>
+            <div class="practice-step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <strong>세션 전환 연습</strong>
+                <p><code>Prefix + d</code>로 detach 후, <code>tmux new -s runuts</code>로 두 번째 세션을 만드세요. <code>Prefix + s</code>로 세션 목록을 보고 전환해보세요.</p>
+              </div>
+            </div>
+            <div class="practice-step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <strong>자동화 스크립트 적용</strong>
+                <p>Claude Code에게 "위 워크스페이스 스크립트를 만들어줘"라고 요청하세요. 실행 후 <code>tmux ls</code>로 결과를 확인합니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">이해 점검</div>
+          <div class="quiz-list">
+            <details class="quiz-item">
+              <summary>Q. Session, Window, Pane의 차이를 한 줄씩 설명할 수 있는가?</summary>
+              <div class="quiz-answer">
+                <strong>Session:</strong> 독립적인 작업 환경 묶음. 프로젝트 단위로 분리. detach/attach의 단위.<br>
+                <strong>Window:</strong> 세션 안의 탭. 작업 유형별로 구분. 번호로 전환.<br>
+                <strong>Pane:</strong> 윈도우 안의 분할된 영역. 화면을 나누어 동시에 보기.
+              </div>
+            </details>
+            <details class="quiz-item">
+              <summary>Q. 왜 프로젝트마다 별도의 세션을 만드는 것이 좋은가?</summary>
+              <div class="quiz-answer">
+                각 세션이 독립적인 working directory를 가지므로 프로젝트 간 파일 혼동이 없습니다. Claude Code를 프로젝트별로 실행하면 각각의 CLAUDE.md와 settings.json이 적용됩니다. 또한 세션별로 독립적으로 detach/attach할 수 있어, 한 프로젝트 작업을 잠시 멈추고 다른 프로젝트로 전환하기 쉽습니다.
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <a href="#lesson-1-1" class="lesson-nav-btn" onclick="navigateTo('lesson-1-1')">&#8592; 1-1 Ghostty 통합</a>
+          <a href="#lesson-1-3" class="lesson-nav-btn lesson-nav-next" onclick="navigateTo('lesson-1-3')">1-3 Claude Code 통합 패턴 &#8594;</a>
+        </div>
+      </section>
+
+      <!-- ===== LESSON 1-3 ~ 5-5 (placeholder) ===== -->
+      <section class="page" id="lesson-1-3">
+        <div class="lesson-header" style="--phase-color: var(--blue)">
+          <div class="lesson-phase">Phase 1 &mdash; 터미널 환경</div>
+          <h1>1-3. tmux + Claude Code 통합 패턴</h1>
+          <p class="lesson-desc">Claude Code를 tmux 안에서 효율적으로 운영하는 패턴을 학습합니다.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">학습 콘텐츠</div>
+          <div class="coming-soon">
+            <span class="coming-icon">&#128218;</span>
+            <p>이 레슨의 콘텐츠는 학습 진행에 따라 채워집니다.</p>
+            <p class="coming-sub">Claude Code 세션에서 "1-3 학습 시작"이라고 말하면 이 페이지가 업데이트됩니다.</p>
+          </div>
+        </div>
+        <div class="lesson-nav">
+          <a href="#lesson-1-2" class="lesson-nav-btn" onclick="navigateTo('lesson-1-2')">&#8592; 1-2 레이아웃</a>
+          <a href="#lesson-1-4" class="lesson-nav-btn lesson-nav-next" onclick="navigateTo('lesson-1-4')">1-4 환경 영속성 &#8594;</a>
+        </div>
+      </section>
+
+      <!-- 나머지 레슨들 - JS에서 동적 생성 -->
+
+      <!-- ===== 명령어 사전 ===== -->
+      <section class="page" id="ref-commands">
+        <div class="lesson-header" style="--phase-color: var(--lavender)">
+          <div class="lesson-phase">참고자료</div>
+          <h1>명령어 사전</h1>
+          <p class="lesson-desc">Claude Code, tmux, Ghostty의 핵심 명령어를 한 곳에서 검색합니다.</p>
+        </div>
+
+        <div class="card">
+          <input type="text" id="cmdSearch" class="search-input" placeholder="명령어 검색... (예: split, attach, hook)">
+        </div>
+
+        <div class="card" id="cmdList">
+          <div class="cmd-category">
+            <h3>Claude Code &mdash; 실행</h3>
+            <div class="cmd-grid">
+              <div class="cmd"><code>claude</code><span>대화형 모드 시작</span></div>
+              <div class="cmd"><code>claude -p "프롬프트"</code><span>비대화형 (Headless) 실행</span></div>
+              <div class="cmd"><code>claude --resume</code><span>마지막 세션 이어서 시작</span></div>
+              <div class="cmd"><code>claude --continue</code><span>가장 최근 대화 계속</span></div>
+              <div class="cmd"><code>claude config</code><span>설정 관리 (set/get/list)</span></div>
+              <div class="cmd"><code>claude mcp</code><span>MCP 서버 관리 (add/remove/list)</span></div>
+              <div class="cmd"><code>claude update</code><span>Claude Code 업데이트</span></div>
+            </div>
+          </div>
+
+          <div class="cmd-category">
+            <h3>Claude Code &mdash; 세션 내 명령어</h3>
+            <div class="cmd-grid">
+              <div class="cmd"><code>/help</code><span>도움말 표시</span></div>
+              <div class="cmd"><code>/clear</code><span>대화 컨텍스트 초기화</span></div>
+              <div class="cmd"><code>/compact</code><span>대화 압축 (컨텍스트 절약)</span></div>
+              <div class="cmd"><code>/cost</code><span>현재 세션 비용 확인</span></div>
+              <div class="cmd"><code>/status</code><span>모델, 컨텍스트 상태 확인</span></div>
+              <div class="cmd"><code>/config</code><span>설정 변경</span></div>
+              <div class="cmd"><code>/permissions</code><span>권한 설정 확인/변경</span></div>
+              <div class="cmd"><code>/mcp</code><span>MCP 서버 상태 확인</span></div>
+              <div class="cmd"><code>/memory</code><span>메모리 관리</span></div>
+              <div class="cmd"><code>/fast</code><span>빠른 출력 모드 토글</span></div>
+            </div>
+          </div>
+
+          <div class="cmd-category">
+            <h3>tmux &mdash; 세션 관리 (Prefix: Ctrl+Space)</h3>
+            <div class="cmd-grid">
+              <div class="cmd"><code>tmux new -s 이름</code><span>새 세션 생성</span></div>
+              <div class="cmd"><code>tmux attach -t 이름</code><span>세션 연결 (attach)</span></div>
+              <div class="cmd"><code>tmux ls</code><span>세션 목록</span></div>
+              <div class="cmd"><code>tmux kill-session -t 이름</code><span>세션 종료</span></div>
+              <div class="cmd"><code>Prefix + d</code><span>세션 분리 (detach)</span></div>
+              <div class="cmd"><code>Prefix + s</code><span>세션 목록 / 전환</span></div>
+              <div class="cmd"><code>Prefix + (</code><span>이전 세션</span></div>
+              <div class="cmd"><code>Prefix + )</code><span>다음 세션</span></div>
+            </div>
+          </div>
+
+          <div class="cmd-category">
+            <h3>tmux &mdash; 윈도우 / Pane</h3>
+            <div class="cmd-grid">
+              <div class="cmd"><code>Prefix + c</code><span>새 윈도우</span></div>
+              <div class="cmd"><code>Prefix + ,</code><span>윈도우 이름 변경</span></div>
+              <div class="cmd"><code>Prefix + 0~9</code><span>윈도우 번호로 전환</span></div>
+              <div class="cmd"><code>Prefix + %</code><span>세로 분할</span></div>
+              <div class="cmd"><code>Prefix + "</code><span>가로 분할</span></div>
+              <div class="cmd"><code>Prefix + 방향키</code><span>pane 간 이동</span></div>
+              <div class="cmd"><code>Prefix + z</code><span>pane 최대화/복원 (zoom)</span></div>
+              <div class="cmd"><code>Prefix + x</code><span>현재 pane 닫기</span></div>
+              <div class="cmd"><code>Prefix + [</code><span>복사 모드 진입</span></div>
+              <div class="cmd"><code>Prefix + Tab</code><span>yazi 파일 탐색기 (커스텀)</span></div>
+            </div>
+          </div>
+
+          <div class="cmd-category">
+            <h3>Ghostty</h3>
+            <div class="cmd-grid">
+              <div class="cmd"><code>Cmd + T</code><span>새 탭</span></div>
+              <div class="cmd"><code>Cmd + W</code><span>현재 탭 닫기</span></div>
+              <div class="cmd"><code>Cmd + 1~9</code><span>탭 번호로 전환</span></div>
+              <div class="cmd"><code>Cmd + ,</code><span>설정 열기</span></div>
+              <div class="cmd"><code>Cmd + Shift + ,</code><span>설정 다시 로드 (재시작 없이)</span></div>
+              <div class="cmd"><code>Cmd + D</code><span>세로 분할 (Ghostty 내장)</span></div>
+              <div class="cmd"><code>Cmd + Shift + D</code><span>가로 분할</span></div>
+              <div class="cmd"><code>Cmd + Shift + Enter</code><span>pane 최대화/복원</span></div>
+            </div>
+          </div>
+
+          <div class="cmd-category">
+            <h3>설정 파일 위치</h3>
+            <div class="cmd-grid">
+              <div class="cmd"><code>~/.claude/settings.json</code><span>Claude Code 전역 설정</span></div>
+              <div class="cmd"><code>~/.claude/CLAUDE.md</code><span>전역 지시 파일</span></div>
+              <div class="cmd"><code>.claude/settings.json</code><span>프로젝트별 설정</span></div>
+              <div class="cmd"><code>CLAUDE.md</code><span>프로젝트 루트 지시 파일</span></div>
+              <div class="cmd"><code>~/.claude/commands/</code><span>커스텀 슬래시 명령어</span></div>
+              <div class="cmd"><code>~/.tmux.conf</code><span>tmux 설정</span></div>
+              <div class="cmd"><code>~/Library/Application Support/com.mitchellh.ghostty/config</code><span>Ghostty 설정</span></div>
+              <div class="cmd"><code>.mcp.json</code><span>프로젝트별 MCP 서버 설정</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 공식 문서 ===== -->
+      <section class="page" id="ref-links">
+        <div class="lesson-header" style="--phase-color: var(--lavender)">
+          <div class="lesson-phase">참고자료</div>
+          <h1>공식 문서 링크</h1>
+        </div>
+        <div class="card">
+          <div class="link-grid">
+            <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener" class="link-card">
+              <strong>Claude Code 공식 문서</strong>
+              <span>전체 가이드, 시작하기, 설정</span>
+            </a>
+            <a href="https://docs.anthropic.com/en/docs/claude-code/settings" target="_blank" rel="noopener" class="link-card">
+              <strong>Settings 레퍼런스</strong>
+              <span>settings.json 전체 옵션</span>
+            </a>
+            <a href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank" rel="noopener" class="link-card">
+              <strong>Hooks 문서</strong>
+              <span>PreToolUse, PostToolUse, Notification 등</span>
+            </a>
+            <a href="https://docs.anthropic.com/en/docs/claude-code/memory" target="_blank" rel="noopener" class="link-card">
+              <strong>Memory 시스템</strong>
+              <span>CLAUDE.md, 프로젝트 메모리</span>
+            </a>
+            <a href="https://docs.anthropic.com/en/docs/claude-code/mcp" target="_blank" rel="noopener" class="link-card">
+              <strong>MCP 통합</strong>
+              <span>MCP 서버 설정 및 활용</span>
+            </a>
+            <a href="https://ghostty.org/docs" target="_blank" rel="noopener" class="link-card">
+              <strong>Ghostty 문서</strong>
+              <span>공식 가이드 및 설정</span>
+            </a>
+            <a href="https://ghostty.org/docs/config/reference" target="_blank" rel="noopener" class="link-card">
+              <strong>Ghostty 설정 레퍼런스</strong>
+              <span>전체 config 옵션 목록</span>
+            </a>
+            <a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener" class="link-card">
+              <strong>tmux 위키</strong>
+              <span>공식 가이드, FAQ</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 설정 파일 맵 ===== -->
+      <section class="page" id="ref-files">
+        <div class="lesson-header" style="--phase-color: var(--lavender)">
+          <div class="lesson-phase">참고자료</div>
+          <h1>설정 파일 맵</h1>
+          <p class="lesson-desc">Claude Code 생태계의 모든 설정 파일과 그 역할을 한 눈에 파악합니다.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Claude Code 설정 계층</div>
+          <div class="file-tree">
+            <div class="ft-item ft-root">
+              <code>~/.claude/</code> <span class="ft-desc">전역 Claude Code 디렉토리</span>
+            </div>
+            <div class="ft-item ft-l1">
+              <code>settings.json</code> <span class="ft-desc">전역 설정 (hooks, permissions, MCP)</span>
+            </div>
+            <div class="ft-item ft-l1">
+              <code>settings.local.json</code> <span class="ft-desc">로컬 전용 설정 (git 무시용)</span>
+            </div>
+            <div class="ft-item ft-l1">
+              <code>CLAUDE.md</code> <span class="ft-desc">전역 지시 파일 (모든 프로젝트에 적용)</span>
+            </div>
+            <div class="ft-item ft-l1">
+              <code>commands/</code> <span class="ft-desc">커스텀 슬래시 명령어 디렉토리</span>
+            </div>
+            <div class="ft-item ft-l1">
+              <code>projects/</code> <span class="ft-desc">프로젝트별 메모리 저장소</span>
+            </div>
+
+            <div class="ft-divider"></div>
+
+            <div class="ft-item ft-root">
+              <code>프로젝트 루트/</code> <span class="ft-desc">각 프로젝트 디렉토리</span>
+            </div>
+            <div class="ft-item ft-l1">
+              <code>CLAUDE.md</code> <span class="ft-desc">프로젝트별 지시 (전역보다 우선)</span>
+            </div>
+            <div class="ft-item ft-l1">
+              <code>.claude/settings.json</code> <span class="ft-desc">프로젝트별 설정</span>
+            </div>
+            <div class="ft-item ft-l1">
+              <code>.claude/commands/</code> <span class="ft-desc">프로젝트별 커스텀 명령어</span>
+            </div>
+            <div class="ft-item ft-l1">
+              <code>.mcp.json</code> <span class="ft-desc">프로젝트별 MCP 서버 설정</span>
+            </div>
+
+            <div class="ft-divider"></div>
+
+            <div class="ft-item ft-root">
+              <code>기타 설정 파일</code>
+            </div>
+            <div class="ft-item ft-l1">
+              <code>~/.tmux.conf</code> <span class="ft-desc">tmux 전역 설정</span>
+            </div>
+            <div class="ft-item ft-l1">
+              <code>~/Library/.../ghostty/config</code> <span class="ft-desc">Ghostty 설정</span>
+            </div>
+          </div>
+
+          <div class="callout callout-info">
+            <strong>우선순위:</strong> 프로젝트별 설정 &gt; 전역 설정. 예를 들어, 프로젝트 CLAUDE.md의 지시가 전역 CLAUDE.md보다 우선합니다.
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
