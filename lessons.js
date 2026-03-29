@@ -9,97 +9,118 @@ const LESSON_CONTENT = {
 // ============================================================
 
 '1-3': `
+<div class="callout callout-info">
+  <strong>Prefix 리마인더:</strong> 이 레슨에서 "Prefix"는 모두 <kbd>Ctrl+Space</kbd>를 의미합니다. "Prefix + z"는 <kbd>Ctrl+Space</kbd>를 누르고 손을 뗀 뒤 <kbd>z</kbd>를 누르는 것입니다. (1-1에서 배운 내용)
+</div>
+
 <div class="lesson-why card">
   <div class="card-title">왜 지금 이걸 배우는가?</div>
   <ul>
-    <li>Phase 1-1에서 Ghostty를, 1-2에서 tmux 레이아웃을 잡았음 &mdash; 이제 그 안에서 Claude Code를 효율적으로 쓰는 패턴을 익힐 차례</li>
-    <li>Claude Code는 터미널 기반 도구이므로, tmux와 결합하면 작업 효율이 크게 올라감</li>
-    <li>이 패턴들이 Phase 3(멀티 에이전트)의 기반이 됨</li>
+    <li>1-1에서 Ghostty를, 1-2에서 tmux 구조를 잡았음 &mdash; 이제 그 안에서 Claude Code를 <strong>실제로 어떻게 쓰는지</strong> 패턴을 익힐 차례</li>
+    <li>패턴을 모르면 tmux와 Claude Code를 동시에 쓸 때 비효율적으로 사용하게 됨</li>
+    <li>이 패턴들이 Phase 3(여러 Claude Code를 동시에 운영)의 기반</li>
   </ul>
 </div>
 
 <div class="card">
   <div class="card-title">핵심 패턴 4가지</div>
+  <p class="card-desc">Claude Code를 tmux 안에서 효율적으로 사용하는 4가지 핵심 패턴입니다.</p>
   <div class="option-group">
     <div class="option-item">
       <div class="option-name"><code>패턴 1: 분할 작업 (Split Work)</code></div>
       <div class="option-desc">
-        tmux pane을 세로 분할하여, 한쪽에서 Claude Code 실행, 다른 쪽에서 결과 확인 또는 수동 작업.
-        <br><kbd>Ctrl+Space</kbd> &rarr; <kbd>%</kbd>로 분할 후, 한쪽에서 <code>claude</code> 실행.
-        <br>Claude Code가 파일을 수정하면, 반대 pane에서 <code>git diff</code>나 에디터로 바로 확인 가능.
+        <strong>상황:</strong> Claude Code에게 파일을 수정하게 하면서 변경 내용을 실시간으로 보고 싶을 때<br>
+        <strong>방법:</strong> 화면을 세로로 나눠서(Prefix + %), 한쪽에서 Claude Code를 실행하고, 다른 쪽에서 결과를 확인합니다.<br>
+        <strong>예시:</strong> 좌측 pane에서 Claude Code가 코드를 수정 중 &rarr; 우측 pane에서 <code>git diff</code>로 뭐가 바뀌었는지 실시간 확인
       </div>
     </div>
     <div class="option-item">
-      <div class="option-name"><code>패턴 2: Zoom 집중 (Prefix + z)</code></div>
+      <div class="option-name"><code>패턴 2: 줌 모드 (Prefix + z)</code></div>
       <div class="option-desc">
-        Claude Code 출력이 길 때, <kbd>Prefix + z</kbd>로 해당 pane을 전체 화면으로 확대.
-        <br>다시 <kbd>Prefix + z</kbd>를 누르면 원래 레이아웃으로 복원.
-        <br>코드 리뷰나 긴 출력을 읽을 때 유용.
+        <strong>상황:</strong> 화면을 나눠놨는데, Claude Code의 긴 출력을 전체 화면으로 넓게 읽고 싶을 때<br>
+        <strong>방법:</strong> <kbd>Prefix + z</kbd>를 누르면 현재 pane이 전체 화면으로 확대됩니다. 다시 <kbd>Prefix + z</kbd>를 누르면 원래 레이아웃으로 돌아옵니다.<br>
+        <strong>비유:</strong> 창문을 더블클릭해서 최대화 &harr; 원래 크기로 되돌리기와 같습니다.
       </div>
     </div>
     <div class="option-item">
-      <div class="option-name"><code>패턴 3: 멀티 윈도우 전환</code></div>
+      <div class="option-name"><code>패턴 3: 윈도우 전환 (Prefix + 번호)</code></div>
       <div class="option-desc">
-        Window 0에서 Claude Code 실행, Window 1에서 문서 편집, Window 2에서 git 관리.
-        <br><kbd>Prefix + 0</kbd>, <kbd>Prefix + 1</kbd>로 빠르게 전환.
-        <br>Claude Code가 작업 중일 때 다른 윈도우에서 다른 일을 할 수 있음.
+        <strong>상황:</strong> Claude Code가 오래 걸리는 작업을 하고 있는데, 그 사이에 다른 일을 하고 싶을 때<br>
+        <strong>방법:</strong> <kbd>Prefix + 1</kbd>로 다른 윈도우(탭)로 전환하여 다른 작업 수행. Claude Code는 원래 윈도우에서 계속 돌아갑니다. <kbd>Prefix + 0</kbd>으로 다시 돌아오면 결과를 확인할 수 있습니다.<br>
+        <strong>비유:</strong> 브라우저 탭을 전환하는 것과 같지만, 백그라운드 탭에서도 프로그램이 계속 실행됩니다.
       </div>
     </div>
     <div class="option-item">
-      <div class="option-name"><code>패턴 4: 복사 모드 활용</code></div>
+      <div class="option-name"><code>패턴 4: 복사 모드 (Prefix + [)</code></div>
       <div class="option-desc">
-        Claude Code 출력에서 특정 부분만 복사하고 싶을 때:
-        <br><kbd>Prefix + [</kbd>로 복사 모드 진입 &rarr; <kbd>v</kbd>로 선택 시작 &rarr; 이동 &rarr; <kbd>y</kbd>로 복사.
-        <br>복사된 내용은 시스템 클립보드에 들어감 (Jack님의 tmux.conf에 <code>pbcopy</code> 설정이 이미 있음).
+        <strong>상황:</strong> Claude Code의 출력에서 특정 부분만 복사하고 싶을 때 (마우스 드래그가 pane 경계를 넘어가는 문제 등)<br>
+        <strong>방법:</strong>
+        <ol>
+          <li><kbd>Prefix + [</kbd> &mdash; 복사 모드 진입 (화면이 스크롤 가능한 상태로 변경)</li>
+          <li>방향키로 복사 시작점으로 이동</li>
+          <li><kbd>v</kbd> &mdash; 선택 시작</li>
+          <li>방향키로 복사할 범위까지 이동</li>
+          <li><kbd>y</kbd> &mdash; 복사 (클립보드에 저장되고 자동으로 복사 모드 종료)</li>
+        </ol>
+        복사된 내용은 <kbd>Cmd+V</kbd>로 다른 곳에 붙여넣을 수 있습니다.
       </div>
     </div>
   </div>
 </div>
 
 <div class="card">
-  <div class="card-title">Claude Code + tmux 실전 워크플로우</div>
-  <div class="code-block">
-    <div class="code-header"><span>일반적인 작업 흐름</span></div>
-    <pre><code># 1. study 세션에 진입
-tmux attach -t study
-
-# 2. claude 윈도우에서 작업 시작 (Window 0)
-#    좌측 pane: Claude Code
-#    우측 pane: 셸
-
-# 3. Claude Code에게 작업 지시
-#    "이 프로젝트의 구조를 분석해줘"
-#    "index.html에 새 섹션을 추가해줘"
-
-# 4. Claude Code가 작업 중일 때
-#    Prefix + 1 → 다른 윈도우에서 다른 작업
-#    또는 우측 pane에서 git status 확인
-
-# 5. 작업 완료 후 결과 확인
-#    우측 pane에서: git diff
-#    또는 브라우저에서 결과 확인</code></pre>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-title">Claude Code 세션 관리 명령어</div>
+  <div class="card-title">Claude Code 세션 관리 &mdash; 닫았다 다시 열기</div>
+  <p class="card-desc">Claude Code를 실수로 닫거나, 다음 날 이어서 작업하고 싶을 때 사용하는 명령어입니다.</p>
   <div class="option-group">
     <div class="option-item">
       <div class="option-name"><code>claude --continue</code></div>
-      <div class="option-desc">가장 최근 대화를 이어서 진행. 실수로 Claude Code를 닫았을 때 유용.</div>
+      <div class="option-desc"><strong>무엇?</strong> 가장 최근 대화를 자동으로 이어받습니다.<br>
+      <strong>언제?</strong> 실수로 Claude Code를 닫았을 때. 어제 하던 작업을 오늘 이어하고 싶을 때.<br>
+      이전 대화 내용이 모두 기억된 상태로 시작됩니다.</div>
     </div>
     <div class="option-item">
       <div class="option-name"><code>claude --resume</code></div>
-      <div class="option-desc">이전 세션 목록에서 선택하여 재개. 여러 세션 중 특정 것을 이어받을 때.</div>
+      <div class="option-desc"><strong>무엇?</strong> 이전 세션 목록을 보여주고 원하는 것을 선택하여 재개합니다.<br>
+      <strong>언제?</strong> 여러 프로젝트의 세션이 있을 때, 특정 세션을 골라서 이어받고 싶을 때.</div>
     </div>
     <div class="option-item">
       <div class="option-name"><code>/compact</code></div>
-      <div class="option-desc">긴 대화를 압축하여 컨텍스트 윈도우 절약. 대화가 길어졌을 때 실행.</div>
+      <div class="option-desc"><strong>무엇?</strong> Claude Code 안에서 입력하는 명령어. 지금까지의 대화를 요약하여 압축합니다.<br>
+      <strong>언제?</strong> 대화가 길어져서 Claude Code의 응답이 느려지거나 이전 내용을 잘 기억하지 못할 때.<br>
+      <strong>비유:</strong> 두꺼운 노트를 핵심만 정리한 요약본으로 바꾸는 것.</div>
     </div>
     <div class="option-item">
       <div class="option-name"><code>/cost</code></div>
-      <div class="option-desc">현재 세션의 토큰 사용량과 비용 확인. 비용 감각을 키우는 데 유용.</div>
+      <div class="option-desc"><strong>무엇?</strong> 현재 세션에서 사용한 토큰(글자 수)과 대략적인 비용을 보여줍니다.<br>
+      <strong>언제?</strong> 비용이 궁금할 때. 특히 긴 작업을 시킨 후 확인하면 비용 감각을 키울 수 있습니다.</div>
     </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">실전 워크플로우 예시</div>
+  <div class="code-block">
+    <div class="code-header"><span>Claude Code + tmux 일반적인 작업 흐름</span></div>
+    <pre><code># 1단계: tmux 세션에 들어가기
+tmux attach -t study
+
+# 2단계: 화면 나누기 (아직 안 나눠져 있다면)
+# Prefix + % (= Ctrl+Space 누르고, 손 떼고, % 누르기)
+# → 화면이 좌|우로 나뉨
+
+# 3단계: 좌측 pane에서 Claude Code 시작
+claude
+
+# 4단계: Claude Code에게 작업 지시
+# "이 프로젝트의 파일 구조를 분석해줘"
+# "index.html을 수정해줘"
+
+# 5단계: Claude Code가 작업하는 동안
+# Prefix + 방향키(→) → 우측 pane으로 이동
+# git diff 또는 다른 작업 수행
+
+# 6단계: 작업 완료 알림음(Glass.aiff)이 들리면
+# Prefix + 방향키(←) → Claude Code pane으로 돌아가서 결과 확인</code></pre>
   </div>
 </div>
 
@@ -109,22 +130,22 @@ tmux attach -t study
     <div class="practice-step">
       <div class="step-number">1</div>
       <div class="step-content">
-        <strong>분할 작업 패턴 연습</strong>
-        <p>tmux에서 세로 분할 후, 좌측에서 <code>claude</code> 실행. 우측에서 <code>watch -n1 ls -la</code>를 실행하여 Claude Code가 파일을 수정하는 것을 실시간으로 관찰하세요.</p>
+        <strong>분할 + Claude Code 실행</strong>
+        <p>tmux 안에서 <kbd>Prefix + %</kbd>로 화면을 세로로 나누고, 좌측에서 <code>claude</code>를 실행하세요. 우측 pane에서는 <code>ls -la</code>를 입력해 파일 목록을 확인해보세요.</p>
       </div>
     </div>
     <div class="practice-step">
       <div class="step-number">2</div>
       <div class="step-content">
-        <strong>Zoom 모드 전환</strong>
-        <p>Claude Code pane에서 <kbd>Prefix + z</kbd>로 전체 화면 확대 &rarr; 출력 확인 &rarr; 다시 <kbd>Prefix + z</kbd>로 복원하는 연습을 하세요.</p>
+        <strong>줌 모드 연습</strong>
+        <p>Claude Code가 실행 중인 pane에서 <kbd>Prefix + z</kbd>를 누르세요. 전체 화면으로 확대됩니다. 다시 <kbd>Prefix + z</kbd>를 누르면 원래대로 돌아옵니다. 3번 반복 연습하세요.</p>
       </div>
     </div>
     <div class="practice-step">
       <div class="step-number">3</div>
       <div class="step-content">
-        <strong>세션 이어받기</strong>
-        <p>Claude Code 세션에서 간단한 작업을 하고, <kbd>Ctrl+C</kbd>로 종료한 뒤, <code>claude --continue</code>로 이어서 진행해보세요.</p>
+        <strong>세션 이어받기 연습</strong>
+        <p>Claude Code에서 아무 질문이나 한 뒤 <kbd>Ctrl+C</kbd>로 종료하세요. 그 후 <code>claude --continue</code>를 입력하면 이전 대화가 이어집니다.</p>
       </div>
     </div>
   </div>
@@ -134,19 +155,20 @@ tmux attach -t study
   <div class="card-title">이해 점검</div>
   <div class="quiz-list">
     <details class="quiz-item">
-      <summary>Q. Claude Code가 긴 작업을 수행 중일 때, 다른 작업을 하려면 어떻게 하는가?</summary>
+      <summary>Q. Claude Code가 긴 작업을 수행 중일 때, 다른 작업을 하려면?</summary>
       <div class="quiz-answer">
         두 가지 방법이 있습니다:<br>
-        1. <strong>다른 tmux 윈도우로 전환</strong>: <kbd>Prefix + c</kbd>로 새 윈도우를 만들거나 <kbd>Prefix + 1</kbd>로 기존 윈도우로 이동<br>
-        2. <strong>다른 tmux pane에서 작업</strong>: 분할된 반대쪽 pane으로 이동 (<kbd>Prefix + 방향키</kbd>)<br>
-        Claude Code는 백그라운드에서 계속 실행되며, 완료되면 알림음이 울립니다 (Stop hook 설정).
+        1. <strong>같은 윈도우, 다른 pane:</strong> <kbd>Prefix + 방향키</kbd>로 옆 pane으로 이동하여 작업<br>
+        2. <strong>다른 윈도우:</strong> <kbd>Prefix + 1</kbd>로 다른 윈도우(탭)로 전환<br>
+        어느 쪽이든 Claude Code는 원래 pane에서 계속 실행 중이며, 작업이 끝나면 알림음이 울립니다.
       </div>
     </details>
     <details class="quiz-item">
       <summary>Q. <code>claude --continue</code>와 <code>claude --resume</code>의 차이는?</summary>
       <div class="quiz-answer">
-        <strong><code>--continue</code></strong>: 가장 최근 대화를 자동으로 이어감. 별도 선택 없이 바로 진입.<br>
-        <strong><code>--resume</code></strong>: 이전 세션 목록을 보여주고, 원하는 세션을 선택하여 이어감. 여러 프로젝트를 오가며 작업할 때 유용.
+        <strong><code>--continue</code>:</strong> "가장 최근 대화"를 자동으로 이어받음. 선택 과정 없이 바로 시작.<br>
+        <strong><code>--resume</code>:</strong> 이전 세션 목록을 보여주고, 원하는 것을 골라서 이어받음.<br>
+        하나의 프로젝트만 작업한다면 <code>--continue</code>가 편하고, 여러 프로젝트를 오간다면 <code>--resume</code>가 유용합니다.
       </div>
     </details>
   </div>
@@ -157,34 +179,45 @@ tmux attach -t study
 <div class="lesson-why card">
   <div class="card-title">왜 지금 이걸 배우는가?</div>
   <ul>
-    <li>지금까지 만든 tmux 레이아웃이 재부팅하면 사라짐 &mdash; 영속성이 없으면 매번 환경을 재구성해야 함</li>
-    <li>Jack님의 tmux.conf에 이미 resurrect/continuum 플러그인이 설정되어 있음 &mdash; 제대로 활용법을 익힐 차례</li>
-    <li>Phase 5(모바일)에서 세션을 이어받으려면 안정적인 세션 유지가 전제</li>
+    <li>지금까지 만든 tmux 레이아웃(세션, 윈도우, pane)이 Mac을 재부팅하면 전부 사라짐</li>
+    <li>매번 처음부터 레이아웃을 다시 만드는 것은 비효율적 &mdash; 자동으로 복원하는 방법을 배움</li>
+    <li>Phase 5(모바일 접속)에서 안정적인 세션 유지가 필요</li>
   </ul>
 </div>
 
 <div class="card">
-  <div class="card-title">tmux-resurrect와 tmux-continuum</div>
+  <div class="card-title">먼저 알아야 할 개념: 플러그인</div>
   <div class="option-group">
     <div class="option-item">
-      <div class="option-name"><code>tmux-resurrect</code></div>
+      <div class="option-name"><code>플러그인 (Plugin)</code></div>
+      <div class="option-desc"><strong>무엇?</strong> tmux에 추가 기능을 붙여주는 확장 프로그램입니다. tmux 자체에는 "레이아웃 저장" 기능이 없지만, 플러그인을 설치하면 가능해집니다.<br>
+      <strong>비유:</strong> 스마트폰에 앱을 설치하는 것과 같습니다. 기본 기능에 원하는 기능을 추가로 설치합니다.<br>
+      Jack님의 tmux에는 이미 여러 플러그인이 설치되어 있습니다 (tmux.conf에서 <code>set -g @plugin '...'</code> 부분).</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">두 가지 핵심 플러그인</div>
+  <div class="option-group">
+    <div class="option-item">
+      <div class="option-name"><code>tmux-resurrect (부활)</code></div>
       <div class="option-desc">
-        tmux 환경(세션, 윈도우, pane 레이아웃, 작업 디렉토리)을 수동으로 저장/복원하는 플러그인.
+        <strong>무엇?</strong> tmux 환경(세션, 윈도우, pane, 각 pane의 작업 디렉토리)을 파일로 저장하고, 나중에 그대로 복원하는 플러그인입니다.<br>
+        <strong>비유:</strong> 게임의 "세이브/로드" 기능. 현재 상태를 저장해두고, 나중에 불러올 수 있습니다.<br>
+        <strong>사용법:</strong>
         <ul>
-          <li><kbd>Prefix + Ctrl+s</kbd> &mdash; 환경 저장</li>
-          <li><kbd>Prefix + Ctrl+r</kbd> &mdash; 환경 복원</li>
+          <li><kbd>Prefix + Ctrl+s</kbd> &mdash; 현재 환경을 저장 (Save)</li>
+          <li><kbd>Prefix + Ctrl+r</kbd> &mdash; 저장된 환경을 복원 (Restore)</li>
         </ul>
-        저장 위치: <code>~/.tmux/resurrect/</code> 디렉토리에 텍스트 파일로 저장됨.
+        저장 위치: <code>~/.tmux/resurrect/</code> 폴더에 텍스트 파일로 저장됩니다.
       </div>
     </div>
     <div class="option-item">
-      <div class="option-name"><code>tmux-continuum</code></div>
+      <div class="option-name"><code>tmux-continuum (자동 저장)</code></div>
       <div class="option-desc">
-        resurrect를 자동화하는 플러그인. 15분마다 자동 저장하며, tmux 서버 시작 시 자동 복원 가능.
-        <ul>
-          <li>자동 저장: 기본 15분 간격</li>
-          <li>자동 복원: <code>set -g @continuum-restore 'on'</code> 설정 시</li>
-        </ul>
+        <strong>무엇?</strong> resurrect의 "저장" 동작을 자동으로 실행해주는 플러그인입니다. 10~15분마다 자동 저장하며, tmux를 시작할 때 자동 복원도 가능합니다.<br>
+        <strong>비유:</strong> Google Docs의 "자동 저장" 기능. 수동으로 저장하지 않아도 알아서 저장됩니다.
       </div>
     </div>
   </div>
